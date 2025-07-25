@@ -1,0 +1,235 @@
+# AFCO Automatic Document Processing Configuration
+# ?? In Loving Memory of Omar (2007-2024)
+
+# System Settings
+system:
+  name: "AFCO Automatic Document Processing System"
+  version: "1.0.0"
+  memorial: "In Loving Memory of Omar (2007-2024) - Forever 17, Forever Inspiring Innovation"
+
+# Folder Monitoring Settings
+monitoring:
+  auto_process: true
+  processing_delay_seconds: 5
+  max_file_size_mb: 50
+  max_concurrent_processing: 3
+
+  # File patterns to exclude
+  exclude_patterns:
+    - "~$*"      # Office temp files
+    - "*.tmp"    # Temporary files
+    - "*.bak"    # Backup files
+    - "*.log"    # Log files
+
+  # Supported file types
+  supported_extensions:
+    - ".xlsx"
+    - ".xls"
+    - ".csv"
+    - ".docx"
+    - ".doc"
+    - ".pdf"
+
+# Default Watch Folders
+default_folders:
+  - "data/auto_watch"
+  - "D:/Documents/AFCO"
+  - "C:/Users/Public/Documents/AFCO"
+
+# Data Extraction Rules
+extraction_rules:
+  client_data:
+    patterns:
+      - "company"
+      - "client"
+      - "customer"
+      - "????"
+      - "????"
+      - "????"
+    required_fields:
+      - "name"
+      - "contact"
+      - "sector"
+    target_table: "clients"
+    priority: 8
+
+  vendor_data:
+    patterns:
+      - "vendor"
+      - "supplier"
+      - "????"
+      - "?????"
+      - "????"
+    required_fields:
+      - "company_name"
+      - "contact_person"
+      - "products"
+    target_table: "vendors"
+    priority: 7
+
+  rfq_data:
+    patterns:
+      - "rfq"
+      - "tender"
+      - "bid"
+      - "????"
+      - "??????"
+      - "??? ????"
+    required_fields:
+      - "title"
+      - "value"
+      - "deadline"
+    target_table: "rfqs"
+    priority: 9
+
+  financial_data:
+    patterns:
+      - "revenue"
+      - "cost"
+      - "budget"
+      - "???????"
+      - "??????"
+      - "???????"
+      - "sar"
+    required_fields:
+      - "amount"
+      - "date"
+      - "description"
+    target_table: "financial_transactions"
+    priority: 6
+
+# Saudi Market Specific Mappings
+saudi_mappings:
+  # Arabic company indicators
+  company_indicators_ar:
+    - "????"
+    - "?????"
+    - "??????"
+    - "????"
+    - "???"
+
+  # Saudi phone patterns
+  phone_patterns:
+    - "+966"
+    - "05"
+    - "966"
+
+  # Currency patterns
+  currency_patterns:
+    - "sar"
+    - "????"
+    - "sr"
+
+  # Major Saudi companies
+  major_companies:
+    - "aramco"
+    - "sabic"
+    - "stc"
+    - "ncb"
+    - "alrajhi"
+    - "neom"
+    - "pif"
+
+# Field Transformation Rules
+transformations:
+  uppercase:
+    description: "Convert to uppercase"
+    rule: "UPPER(?)"
+
+  lowercase:
+    description: "Convert to lowercase"
+    rule: "LOWER(?)"
+
+  trim_spaces:
+    description: "Remove leading/trailing spaces"
+    rule: "TRIM(?)"
+
+  remove_commas:
+    description: "Remove commas from numbers"
+    rule: "REPLACE(?, ',', '')"
+
+  saudi_phone:
+    description: "Format Saudi phone numbers"
+    rule: "CASE WHEN ? LIKE '05%' THEN '+966' || SUBSTR(?, 2) ELSE ? END"
+
+  format_sar:
+    description: "Format SAR currency"
+    rule: "CAST(REPLACE(REPLACE(?, 'SAR', ''), ',', '') AS REAL)"
+
+# Validation Rules
+validations:
+  required:
+    description: "Field must not be empty"
+    rule: "LENGTH(TRIM(?)) > 0"
+
+  email_format:
+    description: "Valid email format"
+    rule: "? LIKE '%@%.%'"
+
+  saudi_phone:
+    description: "Valid Saudi phone number"
+    rule: "? LIKE '+966%' OR ? LIKE '05%'"
+
+  positive_number:
+    description: "Must be positive number"
+    rule: "CAST(? AS REAL) > 0"
+
+  future_date:
+    description: "Date must be in future"
+    rule: "DATE(?) > DATE('now')"
+
+  min_length_3:
+    description: "Minimum 3 characters"
+    rule: "LENGTH(?) >= 3"
+
+# Database Configuration
+database:
+  path: "data/afco_production.db"
+  backup_enabled: true
+  backup_frequency: "daily"
+  backup_retention_days: 30
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "data/auto_processing.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# Performance Settings
+performance:
+  max_memory_usage_mb: 512
+  processing_timeout_seconds: 300
+  cache_size_mb: 64
+
+# Notification Settings
+notifications:
+  enable_success: true
+  enable_errors: true
+  enable_warnings: true
+
+# UI Settings
+ui:
+  theme: "light"
+  page_title: "AFCO Auto Document Center"
+  page_icon: "??"
+  layout: "wide"
+
+  # Colors (Omar's memorial theme)
+  colors:
+    primary: "#4A90E2"
+    secondary: "#87CEEB"
+    success: "#28a745"
+    warning: "#ffc107"
+    error: "#dc3545"
+
+# Security Settings
+security:
+  max_upload_size_mb: 100
+  allowed_file_types:
+    - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    - "application/vnd.ms-excel"
+    - "text/csv"
+    - "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    - "application/msword"
+    - "application/pdf"

@@ -1,0 +1,19 @@
+2025-07-21 20:21:20,981 - INFO - Configuration loaded successfully from kpi_config.yaml
+2025-07-21 20:21:21,178 - INFO - CSV loaded successfully with utf-8-sig encoding
+2025-07-21 20:21:21,474 - INFO - Configuration loaded from kpi_config.yaml
+2025-07-21 20:21:21,477 - INFO - Output structure created: dashboard\outputs\20250721_202121
+2025-07-21 20:21:21,478 - INFO - Using error-protected data processor
+2025-07-21 20:21:21,482 - INFO - Successfully imported KPIEngine
+2025-07-21 20:21:21,619 - INFO - Successfully imported VisualizationEngine
+2025-07-21 20:21:21,649 - INFO - Successfully imported ReportGenerator
+2025-07-21 20:21:21,650 - ERROR - Error in data processing: 'ErrorProtectedDataProcessor' object has no attribute 'process_all'
+2025-07-21 20:21:21,651 - INFO - Loaded configuration from dictionary
+2025-07-21 20:21:21,652 - INFO - Starting KPI calculations...
+2025-07-21 20:21:21,653 - ERROR - Error in main KPI calculation: 'target'
+2025-07-21 20:21:21,654 - ERROR - Error in team performance calculation: 'target'
+2025-07-21 20:21:21,654 - ERROR - Error in parallel calculation: 'target'
+2025-07-21 20:21:21,654 - ERROR - Error in pipeline metrics calculation: 'opportunity'
+2025-07-21 20:21:21,655 - ERROR - Error calculating KPIs: 'target'
+2025-07-21 20:21:21,690 - ERROR - Error in KPI calculation: 'target'
+2025-07-21 20:21:24,434 - ERROR - Error in visualization generation: [Errno 2] No such file or directory: 'dashboard\\outputs\\20250721_202121\\04_charts\\04_charts\\kpi_dashboard.html'
+2025-07-21 20:21:24,659 - ERROR - Error in report generation: ReportGenerator.__init__() takes 2 positional arguments but 3 were given

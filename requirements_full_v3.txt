@@ -1,0 +1,89 @@
+# Core
+pandas
+numpy
+openpyxl
+xlrd
+matplotlib
+seaborn
+scikit-learn
+scipy
+statsmodels
+
+# Streamlit & UI
+streamlit
+plotly
+altair
+pydeck
+pillow
+stqdm
+streamlit-aggrid
+streamlit-extras
+streamlit-lottie
+streamlit-option-menu
+streamlit-pandas-profiling
+streamlit-tags
+
+# NLP & OCR
+nltk
+spacy
+pdfminer.six
+PyMuPDF
+pytesseract
+textract
+langdetect
+textblob
+sumy
+sentence-transformers
+bertopic
+
+# Web & APIs
+requests
+beautifulsoup4
+httpx
+aiohttp
+fastapi
+uvicorn
+dash
+
+# Excel & Office
+python-docx
+python-pptx
+pythoncom
+pywin32
+pyxlsb
+
+# File & Metadata
+pyyaml
+jsonlines
+python-magic
+chardet
+unidecode
+
+# Geo & Mapping
+geopandas
+shapely
+folium
+geopy
+
+# Advanced Analysis
+networkx
+pymc3
+bokeh
+pmdarima
+tslearn
+xgboost
+lightgbm
+catboost
+mlxtend
+auto-sklearn
+
+# Export
+fpdf
+weasyprint
+pyhtml2pdf
+pypdf2
+
+# Local Arabic/Turkish Support
+farasa
+hazm
+aravec

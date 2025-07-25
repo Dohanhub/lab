@@ -1,0 +1,17 @@
+﻿# THIS REQUIREMENTS FILE HAS BEEN CONSOLIDATED INTO requirements.txt
+====================================================================
+
+Please use the new unified requirements file: **requirements.txt**
+
+All dependencies have been consolidated and simplified.
+
+Install with: pip install -r requirements.txt
+
+💙 In Memory of Omar (2007-2024) - "Forever 17, Forever Inspiring Innovation"
+
+DoganLab/
+├── 🎯 app.py              # MAIN APPLICATION (all features unified)
+├── 🚀 launch.bat          # UNIFIED LAUNCHER (one-click start)
+├── 📋 requirements.txt    # CLEAN DEPENDENCIES (no duplicates)
+├── 📖 README.md          # COMPREHENSIVE GUIDE (all info)
+└── 📊 data/              # YOUR DATA FILES

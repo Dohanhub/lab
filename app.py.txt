@@ -1,0 +1,66 @@
+import streamlit as st
+import pandas as pd
+
+# Load data
+actuals = pd.read_excel("2025 1.xlsx", sheet_name="sales 2025")
+targets = pd.read_excel("Sales and Pre Sales Target 2025 5.xlsx2f}%")
+st.metric("Revenue Achievement", f"{person_data['Revenue Achievement %'].mean():.1f}%")
+st.metric("GP Achievement", f"{person_data['GP Achievement %'].mean():.1f}%")
+st.metric("KPI Score", f"{person_data['KPI Score'].mean():.2f} / 5")
+
+# Charts
+st.line_chart(person_data[['Month', 'Revenue']].set_index('Month'))
+st.line_chart(person_data[['Month', 'GP']].set_index('Month'))
+targets = pd.read_excel("Sales and Pre Sales Target 2025 5.xlsx", sheet_name="SalesTargets")
+
+# Preprocess
+actuals['Invoice Date'] = pd.to_datetime(actuals['Invoice Date'])
+actuals['Month'] = actuals['Invoice Date'].dt.month
+actuals['Revenue'] = actuals['Total Price']
+actuals['GP'] = actuals['Invoice Margin']
+actuals['Margin %'] = actuals['Margin Pct %'] * 100
+
+# Aggregate actuals
+agg_actuals = actuals.groupby(['AIOInvoices.Team Member', 'Month']).agg({
+    'Revenue': 'sum',
+    'GP': 'sum',
+    'Margin %': 'mean'
+}).reset_index()
+
+# Merge with targets
+targets['Month'] = pd.to_datetime(targets['Sales Target Date']).dt.month
+merged = pd.merge(agg_actuals, targets, left_on=['AIOInvoices.Team Member', 'Month'],
+                  right_on=['salesname', 'Month'], how='left')
+
+# KPI Calculations
+merged['Revenue Achievement %'] = (merged['Revenue'] / merged['SalesTarget']) * 100
+merged['GP Achievement %'] = (merged['GP'] / merged['GPsalesTarget']) * 100
+
+# Scoring logic
+def score_kpi(pct):
+    if pct >= 100:
+        return 5
+    elif pct >= 90:
+        return 4
+    elif pct >= 75:
+        return 3
+    elif pct >= 50:
+        return 2
+    else:
+        return 1
+
+merged['Revenue Score'] = merged['Revenue Achievement %'].apply(score_kpi)
+merged['GP Score'] = merged['GP Achievement %'].apply(score_kpi)
+
+# Weighted KPI Score (based on docx)
+merged['KPI Score'] = (merged['Revenue Score'] * 0.4) + (merged['GP Score'] * 0.2)
+
+# Streamlit UI
+st.title("📊 2025 Sales KPI Dashboard")
+
+selected_person = st.selectbox("Select Salesperson", merged['AIOInvoices.Team Member'].unique())
+person_data = merged[merged['AIOInvoices.Team Member'] == selected_person]
+
+st.metric("Total Revenue", f"{person_data['Revenue'].sum():,.0f} SAR")
+st.metric("Total GP", f"{person_data['GP'].sum():,.0f} SAR")
+st.metric("Avg. Margin %", f"{person_data['Margin %'].mean():.

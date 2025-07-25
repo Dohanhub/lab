@@ -1,0 +1,62 @@
+# RFQ & Proposal Management System Requirements
+# Core document generation libraries
+python-docx==0.8.11
+reportlab==4.0.4
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# PDF generation and manipulation
+fpdf2==2.7.6
+weasyprint==60.2
+pdfkit==1.0.0
+
+# Template engines
+jinja2==3.1.2
+docxtpl==0.16.7
+
+# Database connectivity
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+pymongo==4.6.0
+
+# AI and NLP libraries
+openai==1.3.7
+langchain==0.0.350
+transformers==4.36.2
+sentence-transformers==2.2.2
+
+# Data processing and analysis
+pandas==2.1.4
+numpy==1.24.3
+scikit-learn==1.3.2
+
+# Web scraping for competitive analysis
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.16.0
+
+# Email and communication
+smtplib
+email-validator==2.1.0
+python-telegram-bot==20.7
+
+# File handling and utilities
+pathlib
+uuid
+datetime
+json
+logging
+
+# Saudi-specific libraries
+arabic-reshaper==3.0.0
+python-bidi==0.4.2
+
+# Additional utilities
+python-dotenv==1.0.0
+pydantic==2.5.2
+fastapi==0.104.1
+uvicorn==0.24.0
+
+# Streamlit components (already in main requirements)
+streamlit-aggrid==0.3.4.post3
+streamlit-option-menu==0.3.6
